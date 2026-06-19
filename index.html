@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>爱游戏 · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f5f7fa;
+      color: #1e293b;
+      line-height: 1.65;
+    }
+
+    /* —— 深色头图 —— */
+    .hero {
+      background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+      padding: 4.5rem 2rem 3.2rem;
+      text-align: center;
+      color: #f1f5f9;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.7;
+      max-width: 560px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero .badge {
+      display: inline-block;
+      background: #3b82f6;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.9rem;
+      border-radius: 30px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    /* —— 浅色正文区 —— */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.8rem 1.5rem 4.5rem;
+    }
+
+    /* 目录感布局：三列卡片网格 */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.8rem 1.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.03);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #0f172a;
+    }
+
+    .card h3 span {
+      font-size: 1.3rem;
+    }
+
+    .card p, .card ul {
+      font-size: 0.95rem;
+      color: #334155;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .card ul li {
+      padding: 0.3rem 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .card ul li:last-child {
+      border-bottom: none;
+    }
+
+    .card ul li::before {
+      content: "·";
+      color: #3b82f6;
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+
+    /* 强调色链接 */
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    a:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+
+    /* FAQ 摘要区 */
+    .faq-list {
+      background: white;
+      border-radius: 20px;
+      padding: 2.2rem 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.02);
+    }
+
+    .faq-list h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1.4rem;
+      border-left: 4px solid #3b82f6;
+      padding-left: 1rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+
+    .faq-item strong {
+      display: block;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-item p {
+      margin-left: 0;
+      color: #334155;
+      font-size: 0.92rem;
+    }
+
+    /* 提示区与相关区 */
+    .notice-area {
+      background: #f8fafc;
+      border-left: 4px solid #94a3b8;
+      padding: 1.2rem 1.6rem;
+      border-radius: 12px;
+      margin-top: 2rem;
+      font-size: 0.92rem;
+      color: #1e293b;
+    }
+
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      margin: 2.5rem 0 0.5rem;
+    }
+
+    .info-col {
+      flex: 1 1 240px;
+    }
+
+    .info-col h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #0f172a;
+    }
+
+    .info-col p, .info-col a {
+      font-size: 0.9rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 2rem 0 1.5rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .container {
+        padding: 2rem 1rem 3rem;
+      }
+      .faq-list {
+        padding: 1.5rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 深色头图 -->
+  <header class="hero">
+    <span class="badge">知识库入口</span>
+    <h1>爱游戏 · 查询与对照</h1>
+    <p>帮助日常检索、要点对照与延伸阅读，一站式获取游戏领域参考信息。</p>
+  </header>
+
+  <!-- 主内容：目录感卡片 + 说明 + 提示 + 相关 -->
+  <main class="container">
+
+    <!-- 三卡片：目录感布局，对应常见查询场景 -->
+    <div class="grid-3">
+      <div class="card">
+        <h3><span>📋</span> 日常对照</h3>
+        <ul>
+          <li>类型对比：角色扮演 / 策略 / 模拟</li>
+          <li>平台检索：PC · 主机 · 移动端</li>
+          <li>发行年份 / 开发商索引</li>
+          <li>评分区间筛选辅助</li>
+        </ul>
+        <p style="margin-top: 0.8rem;">从 <a href="https://portal-aigames.com">爱游戏</a> 知识库中获取对照数据和横向概览。</p>
+      </div>
+      <div class="card">
+        <h3><span>🔍</span> 延伸阅读</h3>
+        <ul>
+          <li>游戏叙事与机制分析</li>
+          <li>系列作品时间线整理</li>
+          <li>文化背景与考据</li>
+          <li>相关访谈·开发者笔记</li>
+        </ul>
+        <p style="margin-top: 0.8rem;">通过链接进入<a href="https://portal-aigames.com">爱游戏</a>阅读完整条目。</p>
+      </div>
+      <div class="card">
+        <h3><span>🧩</span> 专题速查</h3>
+        <ul>
+          <li>年度榜单 / 奖项汇总</li>
+          <li>经典重制 &amp; 移植记录</li>
+          <li>游戏改编影视清单</li>
+          <li>常用术语与缩写表</li>
+        </ul>
+        <p style="margin-top: 0.8rem;">上述条目均可在<a href="https://portal-aigames.com">爱游戏</a>中按标签检索。</p>
+      </div>
+    </div>
+
+    <!-- FAQ 摘要（说明区 + 提示区） -->
+    <section class="faq-list">
+      <h2>❓ 常见查询指引</h2>
+
+      <div class="faq-item">
+        <strong>如何快速查找某款游戏的详细资料？</strong>
+        <p>建议使用站内搜索功能，或浏览按字母与类型划分的索引页。在 <a href="https://portal-aigames.com">爱游戏</a> 中，每款作品均附有核心信息卡、评分汇总和参考来源。</p>
+      </div>
+      <div class="faq-item">
+        <strong>系列作品对照是否有独立的对比页？</strong>
+        <p>知识库为多代作品提供并列表格，可针对系统、销量、评价等维度横向比较。此类工具页在 <a href="https://portal-aigames.com">爱游戏</a> 的「对照」分区下持续更新。</p>
+      </div>
+      <div class="faq-item">
+        <strong>延伸阅读材料的可信度如何？</strong>
+        <p>所有分析文章均按来源标注，并附有参考文献或外链。用户可通过条目底部的参考区自行查证。</p>
+      </div>
+
+      <!-- 提示区（内嵌） -->
+      <div class="notice-area">
+        <strong>📌 提示：</strong>知识库内容偏向资料性整理，不包含实时价格、下载链接或修改资源。建议结合官方渠道与社区讨论进行交叉参考。
+      </div>
+    </section>
+
+    <!-- 相关信息区（扩展阅读） -->
+    <div class="info-row">
+      <div class="info-col">
+        <h4>相关条目</h4>
+        <p>游戏媒体评分总表 · 近五年发行列表 · 经典系列销量统计 · 独立游戏获奖记录 · 本地化版本差异说明</p>
+      </div>
+      <div class="info-col">
+        <h4>外部参考</h4>
+        <p>维基类站点 · 档案馆 · 开发者博客 · 数字保存计划 · 玩家社群词典</p>
+      </div>
+      <div class="info-col">
+        <h4>更新记录</h4>
+        <p>知识库每季度补充新作条目，并修订已有对照数据。最近一次更新包含模拟类游戏对照与掌机作品补完。</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- 结尾：自然嵌入链接的句子（已在前文多处出现，此处再以不同句式出现一次） -->
+    <p style="font-size: 0.95rem; color: #475569; text-align: center; margin-top: 1rem;">
+      如希望进一步查阅完整知识库，可使用 <a href="https://portal-aigames.com">爱游戏</a> 进行系统性浏览与检索。
+    </p>
+
+  </main>
+
+</body>
+</html>
